@@ -6,4 +6,17 @@ corr <- function(directory, threshold = 0) {
 	## variables) required to compute the correlation between
 	## nitrate and sulfate; the default is 0
 	## Return a numeric vector of correlations
+	cors = numeric(0)
+	n.results <- 0
+	for (fname in list.files(directory)) {
+		data <- read.csv(paste(directory, fname, sep="/"))
+		complete.data.flags <- complete.cases(data)
+		if (sum(complete.data.flags) >= threshold) {
+			n.results <- n.results + 1
+			complete.rows <- data[complete.data.flags,]
+			## Copies, eughh
+			cors[n.results] <- cor(complete.rows$sulfate, complete.rows$nitrate)
+		}
+	}
+	cors
 }
