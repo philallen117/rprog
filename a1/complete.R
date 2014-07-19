@@ -10,13 +10,6 @@ complete <- function(directory, id = 1:332) {
 	## ...
 	## where 'id' is the monitor ID number and 'nobs' is the
 	## number of complete cases
-	all.filenames <- list.files(directory)
-	mon.id <- function (fname) { as.integer(substr(fname, start=1, stop=3)) }
-	is.file.in.range <- function (fname) {
-		mon.id <- mon.id(fname)
-		min(id) <= mon.id & mon.id <= max(id)
-	}
-	files.in.range <- all.filenames[is.file.in.range(all.filenames)]
 	n.complete.cases <- data.frame(id=id, nobs=c(0))
 	idx <- 0
 	for (i in id) {
