@@ -24,13 +24,16 @@ rankall <- function(outcome, num="best") {
 
 	## Get list of numth by state
 	state.numths <- sapply(state.lists, numth, num, simplify = "array")
+	states <- names(state.numths)
+
+	data.frame(hospital=state.numths,state=states, row.names=states)
 
 	## Build up data frame by column. Bit ugly
-	s <- as.data.frame(names(state.lists), stringsAsFactors = FALSE)
-	names(s) <- c("state")
-	h <- as.data.frame(state.numths, stringsAsFactors = FALSE)
-	names(h) <- c("hospital")
-	data.frame(h, s, row.names = s$state)
+	## s <- as.data.frame(names(state.lists), stringsAsFactors = FALSE)
+	## names(s) <- c("state")
+	## h <- as.data.frame(state.numths, stringsAsFactors = FALSE)
+	## names(h) <- c("hospital")
+	## data.frame(h, s, row.names = s$state)
 }
 
 ## Given res, a list of three equal size vectors named
